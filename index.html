@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eva｜職場急診室 - 專屬職場諮詢</title>
+    <meta name="description" content="Eva職場急診室：解決你的職場疑難雜症，給你最適合現況的「處方箋」。">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'royal-green': '#0A2F23',  // 更深、更黑的綠
+                        'british-green': '#144535', // 標準英倫綠
+                        'champagne': '#E5D3B3',     // 香檳金（文字用）
+                        'antique-gold': '#C5A059',  // 古銅金（邊框/強調）
+                        'paper': '#F9F7F2',         // 米白紙張色
+                    },
+                    fontFamily: {
+                        'serif-tc': ['"Noto Serif TC"', 'serif'],
+                        'cinzel': ['"Cinzel"', 'serif'], // 英文標題專用
+                        'serif': ['"Noto Serif TC"', 'serif'], // 相容性別名
+                        'sans': ['"Noto Sans TC"', 'sans-serif'], // 增加無襯線體設定
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Serif TC', serif;
+        }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* 自定義 Checkbox 樣式 */
+        .custom-checkbox:checked {
+            background-color: #0A2F23;
+            border-color: #0A2F23;
+        }
+        .custom-checkbox:checked::after {
+            content: '✔';
+            display: block;
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            line-height: 1.2;
+        }
+        /* Menu Overlay Transition */
+        #menuOverlay {
+            transition: opacity 0.4s ease, visibility 0.4s;
+        }
+        #menuOverlay.hidden-menu {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #menuOverlay.visible-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-royal-green text-paper overflow-x-hidden selection:bg-antique-gold selection:text-royal-green">
+
+    <!-- Top Border Decor -->
+    <div class="h-2 w-full bg-gradient-to-r from-royal-green via-antique-gold to-royal-green sticky top-0 z-50"></div>
+
+    <!-- HAMBURGER MENU BUTTON -->
+    <button onclick="toggleMenu()" class="fixed top-6 right-6 z-50 w-12 h-12 bg-royal-green/90 backdrop-blur border border-antique-gold text-antique-gold rounded-full flex items-center justify-center hover:bg-antique-gold hover:text-royal-green transition duration-300 shadow-lg group">
+        <i class="fa-solid fa-bars text-xl group-hover:rotate-180 transition-transform duration-300" id="menuIcon"></i>
+    </button>
+
+    <!-- FULL SCREEN MENU OVERLAY -->
+    <div id="menuOverlay" class="fixed inset-0 bg-royal-green/95 backdrop-blur-md z-40 hidden-menu flex items-center justify-center">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 bg-noise opacity-30 pointer-events-none"></div>
+        <div class="absolute inset-0 border-[20px] border-transparent pointer-events-none" style="border-image: repeating-linear-gradient(45deg, #C5A059 0, #C5A059 1px, transparent 0, transparent 50%) 10;"></div>
+
+        <nav class="text-center space-y-8 relative z-10">
+            <div class="mb-10">
+                <!-- 【選單 Logo】 使用更穩定的 Google Drive 縮圖連結格式 (&sz=w1000 代表寬度 1000px) -->
+                <img src="https://drive.google.com/thumbnail?id=1xrhrHTWGHnMbwGZFFAQPFEWaKeDDdBlQ&sz=w1000" alt="Eva Logo" class="w-48 h-auto mx-auto mb-4 object-contain">
+                
+                <p class="font-cinzel text-champagne tracking-[0.3em] uppercase">Eva Workplace Clinic</p>
+            </div>
+            
+            <a href="#offer" onclick="toggleMenu()" class="block text-3xl md:text-4xl font-serif-tc font-bold text-white hover:text-antique-gold transition duration-300">限時公告</a>
+            <a href="#services" onclick="toggleMenu()" class="block text-3xl md:text-4xl font-serif-tc font-bold text-white hover:text-antique-gold transition duration-300">門診服務</a>
+            <a href="#profile" onclick="toggleMenu()" class="block text-3xl md:text-4xl font-serif-tc font-bold text-white hover:text-antique-gold transition duration-300">院長介紹</a>
+            <a href="#faq" onclick="toggleMenu()" class="block text-3xl md:text-4xl font-serif-tc font-bold text-white hover:text-antique-gold transition duration-300">常見問題</a>
+            <a href="#booking" onclick="toggleMenu()" class="block text-3xl md:text-4xl font-serif-tc font-bold text-antique-gold border-b-2 border-antique-gold inline-block pb-1 hover:text-white hover:border-white transition duration-300">立即掛號</a>
+        </nav>
+    </div>
+
+    <!-- Main Container (Restored Card Layout) -->
+    <div class="min-h-screen flex flex-col items-center pt-8 pb-12 px-4 md:px-0">
+        
+        <!-- Inner Card -->
+        <main class="w-full max-w-5xl bg-british-green shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
+            <!-- Background Texture -->
+            <div class="absolute inset-0 bg-noise opacity-50 pointer-events-none"></div>
+            
+            <!-- Corner Ornaments (Restored) -->
+            <div class="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-antique-gold z-10"></div>
+            <div class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-antique-gold z-10"></div>
+            <div class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-antique-gold z-10"></div>
+            <div class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-antique-gold z-10"></div>
+
+            <!-- 1. Header / Hero -->
+            <header class="text-center pt-24 pb-16 px-8 relative z-10">
+                
+                <!-- Logo Area (左上角小 Logo) -->
+                <div class="absolute top-0 left-0 m-6 md:m-8 z-30">
+                    <div class="flex items-center">
+                        <!-- 【小 Logo】 去除外框並放大 (w-24 -> w-40) -->
+                        <img src="https://drive.google.com/thumbnail?id=1xrhrHTWGHnMbwGZFFAQPFEWaKeDDdBlQ&sz=w500" alt="Eva Logo" class="w-40 h-auto object-contain">
+                    </div>
+                </div>
+
+                <div class="fade-in-up">
+                    <p class="font-cinzel text-antique-gold tracking-[0.3em] text-sm md:text-base mb-4">The Workplace Clinic</p>
+                    <h1 class="text-4xl md:text-6xl font-serif-tc font-bold text-champagne mb-2 tracking-wide">
+                        <span class="block text-2xl md:text-3xl mb-2 font-normal text-white/80">Eva ｜ </span>
+                        職場急診室
+                    </h1>
+                    <div class="w-24 h-[1px] bg-antique-gold mx-auto my-8"></div>
+                    <p class="text-lg md:text-2xl text-paper/90 font-light leading-relaxed max-w-2xl mx-auto">
+                        職場這條路，<br>
+                        別讓<span class="text-antique-gold border-b border-antique-gold/50 pb-1 mx-1">小擦傷</span>拖成<span class="text-red-400 border-b border-red-400/50 pb-1 mx-1">內傷</span>。
+                    </p>
+                    <p class="mt-6 text-sm md:text-base text-white/60 tracking-wider">
+                        解決你的職場疑難雜症，給你最適合現況的「處方箋」
+                    </p>
+
+                    <div class="mt-10 flex flex-col md:flex-row justify-center gap-4">
+                        <!-- Primary Button -->
+                        <a href="#booking" class="inline-block bg-antique-gold text-royal-green border border-antique-gold px-10 py-3 hover:bg-transparent hover:text-antique-gold transition duration-300 uppercase tracking-[0.2em] text-sm font-bold shadow-lg">
+                            立即掛號
+                        </a>
+                        <!-- Secondary Button -->
+                        <a href="#services" class="inline-block border border-antique-gold text-antique-gold px-10 py-3 hover:bg-antique-gold hover:text-royal-green transition duration-300 uppercase tracking-[0.2em] text-sm font-bold">
+                            查看門診服務
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 2. Limited Offer Section (LIGHT BG, Double Border) -->
+            <section id="offer" class="bg-paper text-royal-green py-16 px-6 relative z-10 border-y border-antique-gold/30">
+                <div class="max-w-4xl mx-auto border-4 border-double border-royal-green/20 p-8 md:p-12 text-center fade-in-up">
+                    <i class="fa-solid fa-hourglass-half text-4xl text-antique-gold mb-4"></i>
+                    <h2 class="text-2xl md:text-3xl font-serif-tc font-bold mb-6 text-royal-green">限時掛號公告</h2>
+                    
+                    <!-- 3天 x 10位 -->
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-royal-green mb-10 border-b border-royal-green/10 pb-8">
+                        <div class="text-center">
+                            <span class="block text-4xl md:text-5xl font-cinzel font-bold">3 <span class="text-xl font-serif-tc text-gray-600">天</span></span>
+                            <span class="text-sm tracking-widest text-gray-500 uppercase">限時掛號</span>
+                        </div>
+                        
+                        <div class="text-2xl text-antique-gold px-4 hidden md:block">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <div class="text-xl text-antique-gold py-2 md:hidden">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+
+                        <div class="text-center">
+                            <span class="block text-4xl md:text-5xl font-cinzel font-bold text-red-800">10 <span class="text-xl font-serif-tc text-gray-600">位</span></span>
+                            <span class="text-sm tracking-widest text-gray-500 uppercase">僅收名額</span>
+                        </div>
+                    </div>
+
+                    <!-- TIMELINE -->
+                    <div class="relative w-full py-4 text-left md:text-center">
+                        <!-- Desktop Line -->
+                        <div class="hidden md:block absolute top-[19px] left-0 right-0 h-[2px] bg-royal-green/20 w-3/4 mx-auto"></div>
+                        <!-- Mobile Line -->
+                        <div class="md:hidden absolute left-[19px] top-0 bottom-0 w-[2px] bg-royal-green/20"></div>
+
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-start gap-8 md:gap-4 relative z-10">
+                            <!-- Step 1 -->
+                            <div class="flex md:flex-col md:flex-1 items-start md:items-center relative">
+                                <div class="w-10 h-10 rounded-full bg-royal-green text-paper border-2 border-antique-gold flex items-center justify-center font-bold shrink-0 md:mb-4 shadow-lg">1</div>
+                                <div class="ml-6 md:ml-0 md:text-center">
+                                    <h4 class="font-cinzel font-bold text-lg text-royal-green">3/16 - 3/18</h4>
+                                    <p class="text-gray-700 font-bold text-lg">限時掛號</p>
+                                    <p class="text-xs text-gray-500 mt-1">請填寫表單登記</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="flex md:flex-col md:flex-1 items-start md:items-center relative">
+                                <div class="w-10 h-10 rounded-full bg-white text-royal-green border-2 border-royal-green flex items-center justify-center font-bold shrink-0 md:mb-4 shadow-lg">2</div>
+                                <div class="ml-6 md:ml-0 md:text-center">
+                                    <h4 class="font-cinzel font-bold text-lg text-royal-green">3/19</h4>
+                                    <p class="text-gray-700 font-bold text-lg">通知繳費</p>
+                                    <p class="text-xs text-gray-500 mt-1">掛號前 10 位</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="flex md:flex-col md:flex-1 items-start md:items-center relative">
+                                <div class="w-10 h-10 rounded-full bg-antique-gold text-royal-green border-2 border-antique-gold flex items-center justify-center font-bold shrink-0 md:mb-4 shadow-lg">3</div>
+                                <div class="ml-6 md:ml-0 md:text-center">
+                                    <h4 class="font-cinzel font-bold text-lg text-royal-green">3/23 - 3/27</h4>
+                                    <p class="text-gray-700 font-bold text-lg">5 天職場問診</p>
+                                    <p class="text-xs text-gray-500 mt-1">正式療程與諮詢</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-8 border-t border-royal-green/10">
+                        <p class="font-bold text-xl md:text-3xl text-royal-green tracking-wide">
+                            掛號費 <span class="font-cinzel">$1500</span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Service Content (DARK BG + WHITE CARDS - PROFESSIONAL) -->
+            <section id="services" class="bg-royal-green text-paper py-20 px-8 relative z-20 border-b border-antique-gold/20">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12 fade-in-up">
+                        <span class="text-antique-gold font-cinzel tracking-widest uppercase text-sm">Service</span>
+                        <h2 class="text-3xl md:text-4xl font-serif-tc font-bold text-champagne mt-2">門診服務內容</h2>
+                        <div class="w-16 h-1 bg-antique-gold mx-auto mt-4"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 text-royal-green fade-in-up">
+                        <!-- Point 1 -->
+                        <div class="bg-white p-8 rounded shadow-lg border-t-4 border-royal-green text-center hover:-translate-y-2 transition duration-300 flex flex-col h-full">
+                            <div class="w-14 h-14 mx-auto bg-royal-green/10 rounded-full flex items-center justify-center mb-4 shrink-0">
+                                <i class="fa-solid fa-comments text-2xl text-royal-green"></i>
+                            </div>
+                            <h3 class="font-serif-tc font-bold text-xl mb-4 border-b-2 border-gray-100 pb-3 text-royal-green">
+                                ① 5 天職場問診<br>
+                                <span class="text-base text-antique-gold block mt-1">不限次數文字諮詢</span>
+                            </h3>
+                            <div class="text-gray-800 text-base leading-relaxed flex-grow text-left font-sans font-medium">
+                                <p class="mb-4">
+                                    問診期間內，你可以針對職場問題反覆提問、延續追問，每一則訊息都會收到回覆與判斷方向。
+                                </p>
+                                <div class="text-center mt-auto">
+                                    <p class="text-royal-green font-bold py-2 px-3 rounded inline-block text-sm border border-royal-green/20">
+                                        ※ 非即時聊天，但每一則都會回覆
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Point 2 -->
+                        <div class="bg-white p-8 rounded shadow-lg border-t-4 border-antique-gold text-center hover:-translate-y-2 transition duration-300 flex flex-col h-full">
+                            <div class="w-14 h-14 mx-auto bg-antique-gold/20 rounded-full flex items-center justify-center mb-4 shrink-0">
+                                <i class="fa-solid fa-user-shield text-2xl text-antique-gold"></i>
+                            </div>
+                            <h3 class="font-serif-tc font-bold text-xl mb-4 border-b-2 border-gray-100 pb-3 text-royal-green">
+                                ② 專解「不能亂判斷」<br>
+                                <span class="text-base text-antique-gold block mt-1">的職場問題</span>
+                            </h3>
+                            <div class="text-gray-800 text-base leading-relaxed text-left flex-grow font-sans font-medium">
+                                <p class="text-center mb-3 font-bold text-royal-green">不論你是員工、主管或雇主，<br>只要你正卡在——</p>
+                                <ul class="space-y-2 mb-5 pl-2">
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-royal-green mt-1 mr-2"></i><span>該不該行動，拿不定主意</span></li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-royal-green mt-1 mr-2"></i><span>擔心一步走錯就踩雷</span></li>
+                                    <li class="flex items-start"><i class="fa-solid fa-check text-royal-green mt-1 mr-2"></i><span>狀況已發生，卻不知道怎麼收</span></li>
+                                </ul>
+                                <div class="text-center mt-auto">
+                                    <p class="text-royal-green font-bold py-2 rounded text-sm border-t border-gray-100">都適合進入【職場急診室】問診。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Point 3 -->
+                        <div class="bg-white p-8 rounded shadow-lg border-t-4 border-royal-green text-center hover:-translate-y-2 transition duration-300 flex flex-col h-full">
+                            <div class="w-14 h-14 mx-auto bg-royal-green/10 rounded-full flex items-center justify-center mb-4 shrink-0">
+                                <i class="fa-solid fa-file-prescription text-2xl text-royal-green"></i>
+                            </div>
+                            <h3 class="font-serif-tc font-bold text-xl mb-4 border-b-2 border-gray-100 pb-3 text-royal-green">
+                                ③ 給你此刻最安全的<br>
+                                <span class="text-base text-antique-gold block mt-1">「處方箋」</span>
+                            </h3>
+                            <div class="text-gray-800 text-base leading-relaxed text-left flex-grow font-sans font-medium">
+                                <p class="text-center mb-3 font-bold text-royal-green">我們不替你做決定，<br>而是協助你看清選項與風險：</p>
+                                <ul class="space-y-2 mb-5 pl-4">
+                                    <li class="flex items-start"><i class="fa-solid fa-circle-check text-royal-green mt-1 mr-2"></i><span>哪些事可以做</span></li>
+                                    <li class="flex items-start"><i class="fa-solid fa-circle-check text-royal-green mt-1 mr-2"></i><span>哪些事該等</span></li>
+                                    <li class="flex items-start"><i class="fa-solid fa-circle-check text-royal-green mt-1 mr-2"></i><span>哪些事要避免</span></li>
+                                </ul>
+                                <div class="text-center mt-auto">
+                                    <p class="text-royal-green font-bold py-1 rounded text-sm border-t border-gray-100">讓你在行動前，先把風險想清楚。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Disclaimer -->
+                    <div class="mt-12 bg-british-green border border-antique-gold/30 p-6 rounded-lg flex items-start gap-4 fade-in-up text-left shadow-lg">
+                        <i class="fa-solid fa-circle-info text-antique-gold mt-1 text-xl"></i>
+                        <div>
+                            <h4 class="font-bold text-champagne mb-1 font-serif-tc">【 門診須知 】</h4>
+                            <p class="text-sm text-gray-300 leading-relaxed font-sans">
+                                本活動為「職場個人諮詢」，非即時聊天服務<br>
+                                但在 5 天問診期間內，你的每一則訊息、每一個疑問，皆會回覆。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Doctor Profile -->
+            <section id="profile" class="bg-[#F0EEE6] text-royal-green py-20 px-6 relative z-10">
+                <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-stretch fade-in-up">
+                    <!-- Image Side -->
+                    <div class="md:w-1/3 bg-gray-300 min-h-[300px] relative overflow-hidden group">
+                        
+                        <!-- 【院長照片】 已更新為您的 Google Drive 圖片 -->
+                        <img src="https://drive.google.com/thumbnail?id=1G4tkOWq9iwPi6lTKATXI92MEoZ9Dqr0f&sz=w800" alt="Eva 院長" class="absolute inset-0 w-full h-full object-cover">
+                        
+                        <!-- 舊的 Icon (註解保留) -->
+                        <!-- 
+                        <div class="absolute inset-0 bg-gray-400 flex items-center justify-center">
+                             <i class="fa-solid fa-user-tie text-6xl text-gray-500"></i>
+                        </div> 
+                        -->
+                        
+                        <!-- 移除原本蓋在上面的遮罩層 -->
+                        <!-- <div class="absolute inset-0 bg-royal-green/20 group-hover:bg-royal-green/0 transition duration-500"></div> -->
+                        
+                        <!-- 已移除 EVA Director 文字疊加層 -->
+                    </div>
+                    
+                    <!-- Text Side -->
+                    <div class="md:w-2/3 p-8 md:p-12 bg-white border border-gray-200">
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <h2 class="text-3xl font-serif-tc font-bold text-royal-green">Eva 院長</h2>
+                                <p class="text-antique-gold font-bold text-sm tracking-wider mt-1 uppercase">職場法律科 主治醫師</p>
+                            </div>
+                            <i class="fa-solid fa-scale-balanced text-3xl text-gray-200"></i>
+                        </div>
+                        
+                        <div class="space-y-6 text-gray-700">
+                            <div>
+                                <h4 class="font-bold text-royal-green text-sm uppercase tracking-wide mb-2 border-b border-gray-200 pb-1">Specialties / 專長</h4>
+                                <p class="text-sm leading-relaxed">勞動法令 x 職場溝通談判 x 風險評估 x 邏輯思考</p>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="font-bold text-royal-green text-sm uppercase tracking-wide mb-2 border-b border-gray-200 pb-1">Experience / 經歷</h4>
+                                    <ul class="text-sm list-disc list-outside ml-4 space-y-1 text-gray-600">
+                                        <li>灃禾集團 副總經理</li>
+                                        <li>《企業危機百科》創辦人</li>
+                                        <li>多家企業法務顧問</li>
+                                        <li>企業培訓講師|專注職場危機解析與決策輔導</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-royal-green text-sm uppercase tracking-wide mb-2 border-b border-gray-200 pb-1">Education / 學歷</h4>
+                                    <p class="text-sm text-gray-600">台大（PLMBA）事業經營法務班</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. FAQ Section -->
+            <section id="faq" class="py-20 px-6 bg-royal-green text-paper relative z-10 border-y border-antique-gold/20">
+                <div class="max-w-5xl mx-auto">
+                    <!-- Title -->
+                    <div class="text-center mb-10 fade-in-up">
+                        <i class="fa-regular fa-circle-question text-3xl text-antique-gold mb-4"></i>
+                        <h2 class="text-2xl md:text-3xl font-serif-tc font-bold text-champagne">常見問題 FAQ</h2>
+                        <p class="text-xs text-white/40 tracking-widest mt-2 uppercase">Questions & Answers</p>
+                    </div>
+
+                    <!-- Vertical Stack -->
+                    <div class="max-w-3xl mx-auto space-y-6 text-left">
+                        <!-- Q1 -->
+                        <div class="fade-in-up group border-b border-white/5 pb-6 last:border-0 last:pb-0">
+                            <h3 class="font-bold text-xl text-antique-gold mb-2 flex items-start">
+                                <span class="text-white/10 text-4xl font-cinzel mr-5 -mt-1 group-hover:text-white/30 transition duration-300">01</span>
+                                <span class="mt-1">這是即時聊天或一對一通話嗎？</span>
+                            </h3>
+                            <div class="pl-14 md:pl-16">
+                                <p class="text-base text-white/80 leading-relaxed">
+                                    不是即時聊天，也不包含通話或視訊。<br>
+                                    本服務為 <span class="text-white font-bold border-b border-white/30 pb-0.5">5 天職場問診｜文字諮詢</span>，<br>
+                                    在問診期間內，你的每一則訊息都會收到回覆與判斷方向。
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Q2 -->
+                        <div class="fade-in-up group border-b border-white/5 pb-6 last:border-0 last:pb-0" style="transition-delay: 0.1s">
+                            <h3 class="font-bold text-xl text-antique-gold mb-2 flex items-start">
+                                <span class="text-white/10 text-4xl font-cinzel mr-5 -mt-1 group-hover:text-white/30 transition duration-300">02</span>
+                                <span class="mt-1">我可以問幾個問題？會不會問太多不好？</span>
+                            </h3>
+                            <div class="pl-14 md:pl-16">
+                                <p class="text-base text-white/80 leading-relaxed">
+                                    問診期間內 <span class="text-white font-bold border-b border-white/30 pb-0.5">不限次數提問</span>，<br>
+                                    你可以一次問完、也可以分天慢慢釐清，<br>
+                                    只要與你的職場狀況相關，都可以提出。
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="fade-in-up group border-b border-white/5 pb-6 last:border-0 last:pb-0" style="transition-delay: 0.2s">
+                            <h3 class="font-bold text-xl text-antique-gold mb-2 flex items-start">
+                                <span class="text-white/10 text-4xl font-cinzel mr-5 -mt-1 group-hover:text-white/30 transition duration-300">03</span>
+                                <span class="mt-1">如果沒被錄取，或臨時不適合怎麼辦？</span>
+                            </h3>
+                            <div class="pl-14 md:pl-16">
+                                <p class="text-base text-white/80 leading-relaxed">
+                                    本活動採限額掛號制，將於 3/19 統一通知前 10 名錄取者。<br>
+                                    <span class="text-white">未錄取者不需繳費。</span><br>
+                                    錄取後若未於 24 小時內完成繳費，名額將釋出給候補名單。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reassurance -->
+                    <div class="mt-16 text-center fade-in-up">
+                        <div class="inline-block border border-antique-gold/30 bg-british-green/50 px-8 py-6 rounded-lg relative max-w-2xl mx-auto">
+                            <i class="fa-solid fa-quote-left text-antique-gold/20 absolute top-3 left-3 text-2xl"></i>
+                            <i class="fa-solid fa-quote-right text-antique-gold/20 absolute bottom-3 right-3 text-2xl"></i>
+                            
+                            <p class="text-champagne font-serif-tc tracking-wider text-base relative z-10">
+                                這不是法律訴訟或制式答案，而是依你的實際狀況給出的判斷建議。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Booking Form -->
+            <section id="booking" class="py-24 px-6 relative z-10">
+                <div class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded shadow-2xl relative border-t-4 border-antique-gold fade-in-up text-left">
+                    
+                    <h2 class="text-3xl font-serif-tc font-bold text-british-green mb-6 text-center">
+                        <i class="fa-solid fa-clipboard-list mr-2"></i> 掛號單
+                    </h2>
+                    
+                    <div id="formIntro" class="text-center mb-10 space-y-4">
+                        <p class="text-xl font-bold text-british-green">歡迎掛號【Eva 老師｜職場急診室】🩺</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            本活動為限額快閃個人諮詢，<br>
+                            採「掛號制」，僅邀請前 10 名進行 5 天職場問診。
+                        </p>
+                        <p class="text-gray-600 text-sm">
+                            請協助填寫以下資料，以利安排問診與聯繫。
+                        </p>
+                    </div>
+
+                    <form id="consultationForm" class="space-y-6" onsubmit="handleFormSubmit(event)">
+                        <!-- Name -->
+                        <div>
+                            <label for="name" class="block text-sm font-bold text-gray-700 mb-1">姓名 <span class="text-red-500">*</span></label>
+                            <input type="text" id="name" name="name" required class="w-full border-b-2 border-gray-300 bg-gray-50 px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800" placeholder="請輸入您的真實姓名">
+                        </div>
+
+                        <!-- Instagram -->
+                        <div>
+                            <label for="instagram" class="block text-sm font-bold text-gray-700 mb-1">Instagram 帳號 <span class="text-red-500">*</span></label>
+                            <input type="text" id="instagram" name="instagram" required class="w-full border-b-2 border-gray-300 bg-gray-50 px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800" placeholder="@example">
+                            <p class="text-xs text-gray-500 mt-2 leading-relaxed">
+                                （請填寫正確可搜尋的 IG 帳號，若不確定是否填寫正確，請於送出表單後主動私訊小編告知，謝謝 😊）
+                            </p>
+                        </div>
+
+                        <!-- Phone -->
+                        <div>
+                            <label for="phone" class="block text-sm font-bold text-gray-700 mb-1">聯絡電話 <span class="text-red-500">*</span></label>
+                            <input type="tel" id="phone" name="phone" required class="w-full border-b-2 border-gray-300 bg-gray-50 px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800" placeholder="09xx-xxx-xxx">
+                        </div>
+
+                        <!-- Role Selection (Restored to Dropdown) -->
+                        <div>
+                            <label for="role" class="block text-sm font-bold text-gray-700 mb-1">你目前在職場中的角色是？ <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <select id="role" name="role" required class="w-full border-b-2 border-gray-300 bg-gray-50 px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800 appearance-none rounded-none cursor-pointer">
+                                    <option value="" disabled selected>請選擇...</option>
+                                    <option value="員工（勞方）">員工（勞方）</option>
+                                    <option value="主管／管理職">主管／管理職</option>
+                                    <option value="雇主／負責人（資方）">雇主／負責人（資方）</option>
+                                    <option value="自由接案／其他（請簡述）">自由接案／其他（請簡述）</option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                                </div>
+                            </div>
+                            <!-- Other Text Input (Initially hidden) -->
+                            <div id="role_other_container" class="hidden mt-3">
+                                <input type="text" id="role_other" class="w-full border-b-2 border-gray-300 bg-white px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800 text-sm" placeholder="請簡述您的職場角色...">
+                            </div>
+                        </div>
+
+                        <!-- Symptoms -->
+                        <div>
+                            <label for="symptoms" class="block text-sm font-bold text-gray-700 mb-1">主要「症狀」簡述</label>
+                            <textarea id="symptoms" name="symptoms" rows="4" class="w-full border-2 border-gray-300 bg-gray-50 px-3 py-2 rounded focus:outline-none focus:border-british-green transition-colors text-gray-800" placeholder="請簡單描述您目前遇到的職場困擾..."></textarea>
+                        </div>
+
+                        <!-- Confirmations (Checkboxes) -->
+                        <div class="bg-gray-50 p-4 rounded border border-gray-200">
+                            <label class="block text-sm font-bold text-british-green mb-3 border-b border-gray-200 pb-2">重要說明與確認 <span class="text-red-500">*</span></label>
+                            
+                            <div class="flex items-start mb-4">
+                                <div class="flex items-center h-5">
+                                    <input id="confirm1" type="checkbox" required class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-british-green/30 custom-checkbox appearance-none cursor-pointer">
+                                </div>
+                                <label for="confirm1" class="ml-2 text-sm font-medium text-gray-700 cursor-pointer">
+                                    我了解本活動為【文字形式】之職場個人諮詢，非即時聊天服務，但於問診期間內，每一則訊息皆會回覆。
+                                </label>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                    <input id="confirm2" type="checkbox" required class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-british-green/30 custom-checkbox appearance-none cursor-pointer">
+                                </div>
+                                <label for="confirm2" class="ml-2 text-sm font-medium text-gray-700 cursor-pointer">
+                                    我了解本次【職場急診室】採限額制；是否錄取，將於 3/19 統一通知前 10 名，錄取者請於通知後 24 小時內完成繳費，逾時未完成繳費者，將視同放棄並取消名額；未錄取者不需繳費。
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-british-green text-antique-gold font-serif-tc font-bold text-xl py-4 rounded hover:bg-opacity-90 transition duration-300 shadow-lg flex justify-center items-center gap-2">
+                                <span>提交掛號單</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                            <p class="text-center text-xs text-gray-400 mt-3">
+                                <i class="fa-solid fa-lock"></i> 您的資料將嚴格保密，僅供諮詢使用。
+                            </p>
+                        </div>
+                    </form>
+                    
+                    <!-- Success Message (Hidden by default) -->
+                    <div id="successMessage" class="hidden text-center py-10 fade-in-up">
+                        <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fa-solid fa-check text-4xl"></i>
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-serif-tc font-bold text-british-green mb-6">掛號單已送出！</h3>
+                        
+                        <div class="text-gray-700 space-y-4 leading-relaxed text-sm md:text-base max-w-lg mx-auto">
+                            <p>已收到你的掛號單，謝謝你的信任 🩺</p>
+                            
+                            <p class="font-bold text-british-green">
+                                【Eva 老師｜職場急診室】<br>
+                                將於 3/19 統一通知前 10 名錄取者。
+                            </p>
+                            
+                            <div class="w-16 h-px bg-gray-300 mx-auto my-4"></div>
+
+                            <p>
+                                若你有錄取，將會收到繳費通知，<br>
+                                並請於 24 小時內完成繳費，以保留問診名額。
+                            </p>
+                            
+                            <p class="font-bold text-british-green">
+                                請留意您的 Instagram 訊息，以免錯過通知。
+                            </p>
+
+                            <p class="text-xs text-gray-500 mt-6 pt-4 border-t border-gray-100">
+                                若你不確定是否填寫正確的 IG 帳號，<br>
+                                請於表單送出後主動私訊小編告知，謝謝 😊
+                            </p>
+                        </div>
+
+                        <button onclick="location.reload()" class="mt-8 px-6 py-2 border border-british-green text-british-green rounded hover:bg-british-green hover:text-white transition duration-300 text-sm font-bold">
+                            返回首頁
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="bg-british-green text-gray-400 py-8 text-center text-sm border-t border-antique-gold relative z-10">
+                <p class="mb-2 font-serif-tc text-lg text-antique-gold tracking-widest">Eva｜職場急診室</p>
+                <p>&copy; 2026 Eva Workplace Clinic. All Rights Reserved.</p>
+                
+                <!-- Social Media Links -->
+                <div class="mt-4 space-x-4 flex justify-center items-center">
+                    
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/profile.php?id=61572494396270" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-antique-gold hover:text-royal-green hover:border-antique-gold transition duration-300">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/legal._.thinking/reels/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-antique-gold hover:text-royal-green hover:border-antique-gold transition duration-300">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <!-- Line -->
+                    <a href="https://lin.ee/zsTZ7dsi" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-antique-gold hover:text-royal-green hover:border-antique-gold transition duration-300">
+                        <i class="fa-brands fa-line text-lg"></i>
+                    </a>
+                    
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // ==========================================
+        //  Google Form 設定區域
+        //  請填入您在 Google 表單原始碼中找到的 "entry.xxxxxx" ID
+        // ==========================================
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScsMhLUFXcUfhTFqDLYstPxBIqEIX20J9-E-VnATUQ-Ep5vCw/formResponse";
+        
+        const FIELD_MAPPING = {
+            name: "entry.1468484193",      // 姓名
+            instagram: "entry.274981656",  // Instagram
+            phone: "entry.612246579",      // 聯絡電話
+            role: "entry.469425128",       // 角色
+            symptoms: "entry.825998086",    // 症狀
+            confirmations: "entry.154126521" // 確認選項 (Checkbox)
+        };
+
+
+        function toggleMenu() {
+            const menu = document.getElementById('menuOverlay');
+            const icon = document.getElementById('menuIcon');
+            
+            if (menu.classList.contains('hidden-menu')) {
+                menu.classList.remove('hidden-menu');
+                menu.classList.add('visible-menu');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+                // Prevent body scroll
+                document.body.style.overflow = 'hidden';
+            } else {
+                menu.classList.remove('visible-menu');
+                menu.classList.add('hidden-menu');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+                // Restore body scroll
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Logic for Dropdown and "Other" Input Visibility
+        document.getElementById('role').addEventListener('change', function() {
+            const otherContainer = document.getElementById('role_other_container');
+            const otherInput = document.getElementById('role_other');
+            
+            // If "Other" option is selected
+            if (this.value === '自由接案／其他（請簡述）') {
+                otherContainer.classList.remove('hidden');
+                otherInput.setAttribute('required', 'required');
+            } else {
+                otherContainer.classList.add('hidden');
+                otherInput.removeAttribute('required');
+            }
+        });
+
+        // Form Handling Logic with Direct Google Form Submission
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalContent = btn.innerHTML;
+            
+            // 1. UI Loading State
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 處理中...';
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+            btn.disabled = true;
+
+            try {
+                // 2. Collect Data
+                const name = document.getElementById('name').value;
+                const instagram = document.getElementById('instagram').value;
+                const phone = document.getElementById('phone').value;
+                let symptoms = document.getElementById('symptoms').value;
+                
+                // 3. Handle Role and Other Text
+                let roleToSend = document.getElementById('role').value;
+                
+                let otherRoleText = "";
+                if (roleToSend === '自由接案／其他（請簡述）') {
+                    otherRoleText = document.getElementById('role_other').value;
+                }
+
+                // Merge "Other" text into symptoms to satisfy Google Form's strict validation
+                if (otherRoleText) {
+                    symptoms = `【角色備註】：${otherRoleText}\n\n${symptoms}`;
+                }
+
+                // 4. Construct Google Form Data
+                const formData = new URLSearchParams();
+                formData.append(FIELD_MAPPING.name, name);
+                formData.append(FIELD_MAPPING.instagram, instagram);
+                formData.append(FIELD_MAPPING.phone, phone);
+                formData.append(FIELD_MAPPING.role, roleToSend);
+                formData.append(FIELD_MAPPING.symptoms, symptoms);
+
+                // 5. Handle Checkbox Confirmations
+                // Important: Google Form expects exact text match for checkboxes
+                if (document.getElementById('confirm1').checked) {
+                    const text1 = "我了解本活動為【文字形式】之職場個人諮詢，非即時聊天服務，但於問診期間內，每一則訊息皆會回覆。";
+                    formData.append(FIELD_MAPPING.confirmations, text1);
+                }
+                if (document.getElementById('confirm2').checked) {
+                    const text2 = "我了解本次【職場急診室】採限額制；是否錄取，將於 3/19 統一通知前 10 名，錄取者請於通知後 24 小時內完成繳費，逾時未完成繳費者，將視同放棄並取消名額；未錄取者不需繳費。";
+                    formData.append(FIELD_MAPPING.confirmations, text2);
+                }
+
+                // 6. Send Data using no-cors mode
+                await fetch(GOOGLE_FORM_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                // 7. Success UI (Modified to show Alert First)
+                // 加入瀏覽器原生的 Alert 跳出視窗
+                alert("掛號單已送出！即將由專人進行審核。");
+
+                document.getElementById('consultationForm').classList.add('hidden');
+                document.getElementById('formIntro').classList.add('hidden');
+                document.getElementById('successMessage').classList.remove('hidden');
+                document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+
+            } catch (error) {
+                console.error("Error submitting form:", error);
+                alert("送出失敗，請檢查網路連線或稍後再試。");
+                
+                btn.innerHTML = originalContent;
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                btn.disabled = false;
+            }
+        }
+
+        // Animation Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
