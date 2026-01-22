@@ -319,8 +319,8 @@
                         <div>
                             <h4 class="font-bold text-champagne mb-1 font-serif-tc">【 門診須知 】</h4>
                             <p class="text-sm text-gray-300 leading-relaxed font-sans">
-                                本活動為「職場個人諮詢」，非即時聊天服務<br>
-                                但在 5 天問診期間內，你的每一則訊息、每一個疑問，皆會回覆。
+                                本活動為「職場個人諮詢」，非即時聊天服務（Instant Messaging）。<br>
+                                但在 5 天問診期間內，你的每一則訊息、每一個疑問，Eva 老師皆會親自回覆，確保溝通品質。
                             </p>
                         </div>
                     </div>
@@ -497,6 +497,12 @@
                             <input type="tel" id="phone" name="phone" required class="w-full border-b-2 border-gray-300 bg-gray-50 px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800" placeholder="09xx-xxx-xxx">
                         </div>
 
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-bold text-gray-700 mb-1">電子信箱 <span class="text-red-500">*</span></label>
+                            <input type="email" id="email" name="email" required class="w-full border-b-2 border-gray-300 bg-gray-50 px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800" placeholder="example@email.com">
+                        </div>
+
                         <!-- Role Selection (Restored to Dropdown) -->
                         <div>
                             <label for="role" class="block text-sm font-bold text-gray-700 mb-1">你目前在職場中的角色是？ <span class="text-red-500">*</span></label>
@@ -638,6 +644,7 @@
             name: "entry.1468484193",      // 姓名
             instagram: "entry.274981656",  // Instagram
             phone: "entry.612246579",      // 聯絡電話
+            email: "entry.366117670", // ⚠️ 請替換：電子信箱的 entry ID (需先在 Google 表單新增題目)
             role: "entry.469425128",       // 角色
             symptoms: "entry.825998086",    // 症狀
             confirmations: "entry.154126521" // 確認選項 (Checkbox)
@@ -696,6 +703,7 @@
                 const name = document.getElementById('name').value;
                 const instagram = document.getElementById('instagram').value;
                 const phone = document.getElementById('phone').value;
+                const email = document.getElementById('email').value; // Get Email
                 let symptoms = document.getElementById('symptoms').value;
                 
                 // 3. Handle Role and Other Text
@@ -716,6 +724,7 @@
                 formData.append(FIELD_MAPPING.name, name);
                 formData.append(FIELD_MAPPING.instagram, instagram);
                 formData.append(FIELD_MAPPING.phone, phone);
+                formData.append(FIELD_MAPPING.email, email); // Add Email to form data
                 formData.append(FIELD_MAPPING.role, roleToSend);
                 formData.append(FIELD_MAPPING.symptoms, symptoms);
 
