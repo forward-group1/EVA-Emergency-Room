@@ -96,7 +96,7 @@
 
         <nav class="text-center space-y-8 relative z-10">
             <div class="mb-10">
-                <!-- 【選單 Logo】 使用更穩定的 Google Drive 縮圖連結格式 (&sz=w1000 代表寬度 1000px) -->
+                <!-- 【選單 Logo】 -->
                 <img src="https://drive.google.com/thumbnail?id=1xrhrHTWGHnMbwGZFFAQPFEWaKeDDdBlQ&sz=w1000" alt="Eva Logo" class="w-48 h-auto mx-auto mb-4 object-contain">
                 
                 <p class="font-cinzel text-champagne tracking-[0.3em] uppercase">Eva Workplace Clinic</p>
@@ -110,8 +110,14 @@
         </nav>
     </div>
 
-    <!-- Main Container (Restored Card Layout) -->
-    <div class="min-h-screen flex flex-col items-center pt-8 pb-12 px-4 md:px-0">
+    <!-- Main Container (Updated for Full Width on Mobile) -->
+    <!-- 
+         修改說明：
+         原本: pt-8 pb-12 px-4 md:px-0
+         改為: pt-0 pb-0 px-0 md:pt-8 md:pb-12
+         效果: 手機版 (default) 上下左右無留白，達到滿版效果；平板以上 (md) 恢復原本的卡片式留白與懸浮感。
+    -->
+    <div class="min-h-screen flex flex-col items-center pt-0 pb-0 px-0 md:pt-8 md:pb-12">
         
         <!-- Inner Card -->
         <main class="w-full max-w-5xl bg-british-green shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
@@ -130,7 +136,7 @@
                 <!-- Logo Area (左上角小 Logo) -->
                 <div class="absolute top-0 left-0 m-6 md:m-8 z-30">
                     <div class="flex items-center">
-                        <!-- 【小 Logo】 去除外框並放大 (w-24 -> w-40) -->
+                        <!-- 【小 Logo】 -->
                         <img src="https://drive.google.com/thumbnail?id=1xrhrHTWGHnMbwGZFFAQPFEWaKeDDdBlQ&sz=w500" alt="Eva Logo" class="w-40 h-auto object-contain">
                     </div>
                 </div>
@@ -343,10 +349,10 @@
                         </div> 
                         -->
                         
-                        <!-- 移除原本蓋在上面的遮罩層 -->
-                        <!-- <div class="absolute inset-0 bg-royal-green/20 group-hover:bg-royal-green/0 transition duration-500"></div> -->
-                        
-                        <!-- 已移除 EVA Director 文字疊加層 -->
+                        <!-- 已移除 EVA Director 文字疊加層與遮罩 -->
+                        <div class="absolute bottom-6 left-6 border-l-4 border-royal-green pl-4">
+                            <!-- 文字已移除 -->
+                        </div>
                     </div>
                     
                     <!-- Text Side -->
@@ -362,7 +368,7 @@
                         <div class="space-y-6 text-gray-700">
                             <div>
                                 <h4 class="font-bold text-royal-green text-sm uppercase tracking-wide mb-2 border-b border-gray-200 pb-1">Specialties / 專長</h4>
-                                <p class="text-sm leading-relaxed">勞動法令 x 溝通談判 x 風險評估 x 邏輯思考</p>
+                                <p class="text-sm leading-relaxed">勞動法令 x 溝通談判 x 風險評估 </p>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
@@ -371,7 +377,7 @@
                                         <li>灃禾集團 副總經理</li>
                                         <li>《企業危機百科》創辦人</li>
                                         <li>企業法務顧問</li>
-                                        <li>企業培訓講師|職場危機解析與決策輔導</li>
+                                        <li>企業培訓講師<br>職場危機解析與決策輔導</li>
                                     </ul>
                                 </div>
                                 <div>
@@ -419,8 +425,8 @@
                             </h3>
                             <div class="pl-14 md:pl-16">
                                 <p class="text-base text-white/80 leading-relaxed">
-                                    問診期間內 <span class="text-white font-bold border-b border-white/30 pb-0.5">不限次數提問</span>，<br>
-                                    你可以一次問完、也可以分天慢慢釐清，
+                                    問診期間內 <span class="text-white font-bold border-b border-white/30 pb-0.5">不限次數提問</span>，
+                                    你可以一次問完、也可以分天慢慢釐清，<br>
                                     只要與你的職場狀況相關，都可以提出。
                                 </p>
                             </div>
@@ -465,7 +471,7 @@
                     </h2>
                     
                     <div id="formIntro" class="text-center mb-10 space-y-4">
-                        <p class="text-xl font-bold text-british-green">歡迎掛號<br>【Eva 老師｜職場急診室】🩺</p>
+                        <p class="text-xl font-bold text-british-green">歡迎掛號<br>【Eva 老師｜職場急診室】</p>
                         <p class="text-gray-600 text-sm leading-relaxed">
                             本活動為限額快閃個人諮詢，<br>
                             採「掛號制」，僅邀請前 10 名進行 5 天職場問診。
