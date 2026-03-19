@@ -13,8 +13,8 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eva｜職場急診室 - 個人諮詢</title>
-    <meta name="description" content="Eva職場急診室：解決你的職場疑難雜症，給你最適合現況的「處方箋」。">
+    <title>Eva｜職場急診室 - 個人諮詢 (活動已結束)</title>
+    <meta name="description" content="Eva職場急診室：解決你的職場疑難雜症，給你最適合現況的「處方箋」。本期活動已結束。">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -59,19 +59,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* 自定義 Checkbox 樣式 */
-        .custom-checkbox:checked {
-            background-color: #0A2F23;
-            border-color: #0A2F23;
-        }
-        .custom-checkbox:checked::after {
-            content: '✔';
-            display: block;
-            text-align: center;
-            color: white;
-            font-size: 12px;
-            line-height: 1.2;
-        }
         /* Menu Overlay Transition */
         #menuOverlay {
             transition: opacity 0.4s ease, visibility 0.4s;
@@ -108,25 +95,17 @@
             <div class="mb-10">
                 <!-- 【選單 Logo】 -->
                 <img src="https://drive.google.com/thumbnail?id=1xrhrHTWGHnMbwGZFFAQPFEWaKeDDdBlQ&sz=w1000" alt="Eva Logo" class="w-48 h-auto mx-auto mb-4 object-contain">
-                
                 <p class="font-cinzel text-champagne tracking-[0.3em] uppercase">Eva Workplace Clinic</p>
             </div>
             
-            <a href="#offer" onclick="toggleMenu()" class="block text-3xl md:text-4xl font-serif-tc font-bold text-white hover:text-antique-gold transition duration-300">限時公告</a>
             <a href="#services" onclick="toggleMenu()" class="block text-3xl md:text-4xl font-serif-tc font-bold text-white hover:text-antique-gold transition duration-300">門診服務</a>
             <a href="#profile" onclick="toggleMenu()" class="block text-3xl md:text-4xl font-serif-tc font-bold text-white hover:text-antique-gold transition duration-300">院長介紹</a>
             <a href="#faq" onclick="toggleMenu()" class="block text-3xl md:text-4xl font-serif-tc font-bold text-white hover:text-antique-gold transition duration-300">常見問題</a>
-            <a href="#booking" onclick="toggleMenu()" class="block text-3xl md:text-4xl font-serif-tc font-bold text-antique-gold border-b-2 border-antique-gold inline-block pb-1 hover:text-white hover:border-white transition duration-300">立即掛號</a>
+            <a href="#closed" onclick="toggleMenu()" class="block text-3xl md:text-4xl font-serif-tc font-bold text-gray-500 hover:text-white transition duration-300">本期已結束</a>
         </nav>
     </div>
 
-    <!-- Main Container (Updated for Full Width on Mobile) -->
-    <!-- 
-         修改說明：
-         原本: pt-8 pb-12 px-4 md:px-0
-         改為: pt-0 pb-0 px-0 md:pt-8 md:pb-12
-         效果: 手機版 (default) 上下左右無留白，達到滿版效果；平板以上 (md) 恢復原本的卡片式留白與懸浮感。
-    -->
+    <!-- Main Container -->
     <div class="min-h-screen flex flex-col items-center pt-0 pb-0 px-0 md:pt-8 md:pb-12">
         
         <!-- Inner Card -->
@@ -141,7 +120,7 @@
             <div class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-antique-gold z-10"></div>
 
             <!-- 1. Header / Hero -->
-            <header class="text-center pt-24 pb-16 px-8 relative z-10">
+            <header class="text-center pt-24 pb-20 px-8 relative z-10">
                 
                 <!-- Logo Area (左上角小 Logo) -->
                 <div class="absolute top-0 left-0 m-6 md:m-8 z-30">
@@ -151,10 +130,14 @@
                     </div>
                 </div>
 
-                <div class="fade-in-up">
-                    <p class="font-cinzel text-antique-gold tracking-[0.3em] text-sm md:text-base mb-4">The Workplace Clinic</p>
+                <div class="fade-in-up mt-8 md:mt-0">
+                    <!-- Closed Badge -->
+                    <div class="inline-block bg-white/10 text-champagne border border-antique-gold/50 px-6 py-2 rounded-full text-base md:text-lg font-bold tracking-widest mb-6 backdrop-blur-sm shadow-lg">
+                        <i class="fa-solid fa-circle-check mr-2"></i> 本期快閃活動已結束
+                    </div>
+                    
                     <h1 class="text-4xl md:text-6xl font-serif-tc font-bold text-champagne mb-2 tracking-wide">
-                        <span class="block text-2xl md:text-3xl mb-2 font-normal text-white/80">Eva  </span>
+                        <span class="block text-2xl md:text-3xl mb-2 font-normal text-white/80">Eva </span>
                         職場急診室
                     </h1>
                     <div class="w-24 h-[1px] bg-antique-gold mx-auto my-8"></div>
@@ -167,9 +150,9 @@
                     </p>
 
                     <div class="mt-10 flex flex-col md:flex-row justify-center gap-4">
-                        <!-- Primary Button -->
-                        <a href="#booking" class="inline-block bg-antique-gold text-royal-green border border-antique-gold px-10 py-3 hover:bg-transparent hover:text-antique-gold transition duration-300 uppercase tracking-[0.2em] text-sm font-bold shadow-lg">
-                            立即掛號
+                        <!-- Primary Button (IG Link) -->
+                        <a href="https://www.instagram.com/legal._.thinking/reels/" target="_blank" class="inline-block bg-antique-gold text-royal-green border border-antique-gold px-10 py-3 hover:bg-transparent hover:text-antique-gold transition duration-300 uppercase tracking-[0.2em] text-sm font-bold shadow-lg">
+                            <i class="fa-brands fa-instagram mr-2"></i> 追蹤最新動態
                         </a>
                         <!-- Secondary Button -->
                         <a href="#services" class="inline-block border border-antique-gold text-antique-gold px-10 py-3 hover:bg-antique-gold hover:text-royal-green transition duration-300 uppercase tracking-[0.2em] text-sm font-bold">
@@ -179,82 +162,8 @@
                 </div>
             </header>
 
-            <!-- 2. Limited Offer Section (LIGHT BG, Double Border) -->
-            <section id="offer" class="bg-paper text-royal-green py-16 px-6 relative z-10 border-y border-antique-gold/30">
-                <div class="max-w-4xl mx-auto border-4 border-double border-royal-green/20 p-8 md:p-12 text-center fade-in-up">
-                    <i class="fa-solid fa-hourglass-half text-4xl text-antique-gold mb-4"></i>
-                    <h2 class="text-2xl md:text-3xl font-serif-tc font-bold mb-6 text-royal-green">限時掛號公告</h2>
-                    
-                    <!-- 3天 x 10位 -->
-                    <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-royal-green mb-10 border-b border-royal-green/10 pb-8">
-                        <div class="text-center">
-                            <span class="block text-4xl md:text-5xl font-cinzel font-bold">3 <span class="text-xl font-serif-tc text-gray-600">天</span></span>
-                            <span class="text-sm tracking-widest text-gray-500 uppercase">限時掛號</span>
-                        </div>
-                        
-                        <div class="text-2xl text-antique-gold px-4 hidden md:block">
-                            <i class="fa-solid fa-xmark"></i>
-                        </div>
-                        <div class="text-xl text-antique-gold py-2 md:hidden">
-                            <i class="fa-solid fa-xmark"></i>
-                        </div>
-
-                        <div class="text-center">
-                            <span class="block text-4xl md:text-5xl font-cinzel font-bold text-red-800">10 <span class="text-xl font-serif-tc text-gray-600">位</span></span>
-                            <span class="text-sm tracking-widest text-gray-500 uppercase">僅收名額</span>
-                        </div>
-                    </div>
-
-                    <!-- TIMELINE -->
-                    <div class="relative w-full py-4 text-left md:text-center">
-                        <!-- Desktop Line -->
-                        <div class="hidden md:block absolute top-[19px] left-0 right-0 h-[2px] bg-royal-green/20 w-3/4 mx-auto"></div>
-                        <!-- Mobile Line -->
-                        <div class="md:hidden absolute left-[19px] top-0 bottom-0 w-[2px] bg-royal-green/20"></div>
-
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-start gap-8 md:gap-4 relative z-10">
-                            <!-- Step 1 -->
-                            <div class="flex md:flex-col md:flex-1 items-start md:items-center relative">
-                                <div class="w-10 h-10 rounded-full bg-royal-green text-paper border-2 border-antique-gold flex items-center justify-center font-bold shrink-0 md:mb-4 shadow-lg">1</div>
-                                <div class="ml-6 md:ml-0 md:text-center">
-                                    <h4 class="font-cinzel font-bold text-lg text-royal-green">3/16 - 3/18</h4>
-                                    <p class="text-gray-700 font-bold text-lg">限時掛號</p>
-                                    <p class="text-xs text-gray-500 mt-1">請填寫表單登記</p>
-                                </div>
-                            </div>
-
-                            <!-- Step 2 -->
-                            <div class="flex md:flex-col md:flex-1 items-start md:items-center relative">
-                                <div class="w-10 h-10 rounded-full bg-white text-royal-green border-2 border-royal-green flex items-center justify-center font-bold shrink-0 md:mb-4 shadow-lg">2</div>
-                                <div class="ml-6 md:ml-0 md:text-center">
-                                    <h4 class="font-cinzel font-bold text-lg text-royal-green">3/19</h4>
-                                    <p class="text-gray-700 font-bold text-lg">通知繳費</p>
-                                    <p class="text-xs text-gray-500 mt-1">掛號前 10 位</p>
-                                </div>
-                            </div>
-
-                            <!-- Step 3 -->
-                            <div class="flex md:flex-col md:flex-1 items-start md:items-center relative">
-                                <div class="w-10 h-10 rounded-full bg-antique-gold text-royal-green border-2 border-antique-gold flex items-center justify-center font-bold shrink-0 md:mb-4 shadow-lg">3</div>
-                                <div class="ml-6 md:ml-0 md:text-center">
-                                    <h4 class="font-cinzel font-bold text-lg text-royal-green">3/23 - 3/27</h4>
-                                    <p class="text-gray-700 font-bold text-lg">5 天職場問診</p>
-                                    <p class="text-xs text-gray-500 mt-1">正式療程與諮詢</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 pt-8 border-t border-royal-green/10">
-                        <p class="font-bold text-xl md:text-3xl text-royal-green tracking-wide">
-                            掛號費 <span class="font-cinzel">$1500</span>
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 3. Service Content (DARK BG + WHITE CARDS - PROFESSIONAL) -->
-            <section id="services" class="bg-royal-green text-paper py-20 px-8 relative z-20 border-b border-antique-gold/20">
+            <!-- 2. Service Content (DARK BG + WHITE CARDS - PROFESSIONAL) -->
+            <section id="services" class="bg-royal-green text-paper py-20 px-8 relative z-20 border-y border-antique-gold/20">
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-12 fade-in-up">
                         <span class="text-antique-gold font-cinzel tracking-widest uppercase text-sm">Service</span>
@@ -343,7 +252,7 @@
                 </div>
             </section>
 
-            <!-- 4. Doctor Profile -->
+            <!-- 3. Doctor Profile -->
             <section id="profile" class="bg-[#F0EEE6] text-royal-green py-20 px-6 relative z-10">
                 <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-stretch fade-in-up">
                     <!-- Image Side -->
@@ -352,14 +261,6 @@
                         <!-- 【院長照片】 已更新為您的 Google Drive 圖片 -->
                         <img src="https://drive.google.com/thumbnail?id=1G4tkOWq9iwPi6lTKATXI92MEoZ9Dqr0f&sz=w800&v=2" alt="Eva 院長" class="absolute inset-0 w-full h-full object-cover">
                         
-                        <!-- 舊的 Icon (註解保留) -->
-                        <!-- 
-                        <div class="absolute inset-0 bg-gray-400 flex items-center justify-center">
-                             <i class="fa-solid fa-user-tie text-6xl text-gray-500"></i>
-                        </div> 
-                        -->
-                        
-                        <!-- 已移除 EVA Director 文字疊加層與遮罩 -->
                         <div class="absolute bottom-6 left-6 border-l-4 border-royal-green pl-4">
                             <!-- 文字已移除 -->
                         </div>
@@ -400,7 +301,7 @@
                 </div>
             </section>
 
-            <!-- 5. FAQ Section -->
+            <!-- 4. FAQ Section -->
             <section id="faq" class="py-20 px-6 bg-royal-green text-paper relative z-10 border-y border-antique-gold/20">
                 <div class="max-w-5xl mx-auto">
                     <!-- Title -->
@@ -472,156 +373,34 @@
                 </div>
             </section>
 
-            <!-- 6. Booking Form -->
-            <section id="booking" class="py-24 px-6 relative z-10">
-                <div class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded shadow-2xl relative border-t-4 border-antique-gold fade-in-up text-left">
+            <!-- 5. Closed Notice Area (Replaces Booking Form) -->
+            <section id="closed" class="py-24 px-6 relative z-10 bg-paper">
+                <div class="max-w-2xl mx-auto bg-white p-10 md:p-16 rounded shadow-lg border-t-4 border-gray-400 text-center fade-in-up">
                     
-                    <h2 class="text-3xl font-serif-tc font-bold text-british-green mb-6 text-center">
-                        <i class="fa-solid fa-clipboard-list mr-2"></i> 掛號單
+                    <div class="w-20 h-20 bg-gray-100 text-gray-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-door-closed text-4xl"></i>
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-5xl font-serif-tc font-bold text-gray-800 mb-6">
+                        本期快閃活動已結束
                     </h2>
                     
-                    <div id="formIntro" class="text-center mb-10 space-y-4">
-                        <p class="text-xl font-bold text-british-green">歡迎掛號<br>【Eva 老師｜職場急診室】</p>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            本活動為限額快閃個人諮詢，<br>
-                            採「掛號制」，僅邀請前 10 名進行 5 天職場問診。
-                        </p>
-                        <p class="text-gray-600 text-sm">
-                            請協助填寫以下資料，以利安排問診與聯繫。
-                        </p>
-                    </div>
-
-                    <form id="consultationForm" class="space-y-6" onsubmit="handleFormSubmit(event)">
-                        <!-- Name -->
-                        <div>
-                            <label for="name" class="block text-sm font-bold text-gray-700 mb-1">姓名 <span class="text-red-500">*</span></label>
-                            <input type="text" id="name" name="name" required class="w-full border-b-2 border-gray-300 bg-gray-50 px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800" placeholder="請輸入您的真實姓名">
-                        </div>
-
-                        <!-- Instagram -->
-                        <div>
-                            <label for="instagram" class="block text-sm font-bold text-gray-700 mb-1">Instagram 帳號 <span class="text-red-500">*</span></label>
-                            <input type="text" id="instagram" name="instagram" required class="w-full border-b-2 border-gray-300 bg-gray-50 px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800" placeholder="@example">
-                            <p class="text-xs text-gray-500 mt-2 leading-relaxed">
-                                （請填寫正確可搜尋的 IG 帳號，以利後續通知；若不確定是否填寫正確，請於送出表單後主動私訊小編告知，謝謝 😊）
-                            </p>
-                        </div>
-
-                        <!-- Phone -->
-                        <div>
-                            <label for="phone" class="block text-sm font-bold text-gray-700 mb-1">聯絡電話 <span class="text-red-500">*</span></label>
-                            <input type="tel" id="phone" name="phone" required class="w-full border-b-2 border-gray-300 bg-gray-50 px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800" placeholder="09xx-xxx-xxx">
-                        </div>
-
-                        <!-- Email -->
-                        <div>
-                            <label for="email" class="block text-sm font-bold text-gray-700 mb-1">電子信箱 <span class="text-red-500">*</span></label>
-                            <input type="email" id="email" name="email" required class="w-full border-b-2 border-gray-300 bg-gray-50 px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800" placeholder="example@email.com">
-                        </div>
-
-                        <!-- Role Selection (Restored to Dropdown) -->
-                        <div>
-                            <label for="role" class="block text-sm font-bold text-gray-700 mb-1">你目前在職場中的角色是？ <span class="text-red-500">*</span></label>
-                            <div class="relative">
-                                <select id="role" name="role" required class="w-full border-b-2 border-gray-300 bg-gray-50 px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800 appearance-none rounded-none cursor-pointer">
-                                    <option value="" disabled selected>請選擇...</option>
-                                    <option value="員工（勞方）">員工（勞方）</option>
-                                    <option value="主管／管理職">主管／管理職</option>
-                                    <option value="雇主／負責人（資方）">雇主／負責人（資方）</option>
-                                    <option value="自由接案／其他（請簡述）">自由接案／其他（請簡述）</option>
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    <i class="fa-solid fa-chevron-down text-xs"></i>
-                                </div>
-                            </div>
-                            <!-- Other Text Input (Initially hidden) -->
-                            <div id="role_other_container" class="hidden mt-3">
-                                <input type="text" id="role_other" class="w-full border-b-2 border-gray-300 bg-white px-3 py-2 focus:outline-none focus:border-british-green transition-colors text-gray-800 text-sm" placeholder="請簡述您的職場角色...">
-                            </div>
-                        </div>
-
-                        <!-- Symptoms -->
-                        <div>
-                            <label for="symptoms" class="block text-sm font-bold text-gray-700 mb-1">主要「症狀」簡述</label>
-                            <textarea id="symptoms" name="symptoms" rows="4" class="w-full border-2 border-gray-300 bg-gray-50 px-3 py-2 rounded focus:outline-none focus:border-british-green transition-colors text-gray-800" placeholder="請簡單描述您目前遇到的職場困擾..."></textarea>
-                        </div>
-
-                        <!-- Confirmations (Checkboxes) -->
-                        <div class="bg-gray-50 p-4 rounded border border-gray-200">
-                            <label class="block text-sm font-bold text-british-green mb-3 border-b border-gray-200 pb-2">重要說明與確認 <span class="text-red-500">*</span></label>
-                            
-                            <div class="flex items-start mb-4">
-                                <div class="flex items-center h-5">
-                                    <input id="confirm1" type="checkbox" required class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-british-green/30 custom-checkbox appearance-none cursor-pointer">
-                                </div>
-                                <label for="confirm1" class="ml-2 text-sm font-medium text-gray-700 cursor-pointer">
-                                    我了解本活動為【文字形式】之職場個人諮詢，非即時聊天服務，但於問診期間內，每一則訊息皆會回覆。
-                                </label>
-                            </div>
-
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="confirm2" type="checkbox" required class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-british-green/30 custom-checkbox appearance-none cursor-pointer">
-                                </div>
-                                <label for="confirm2" class="ml-2 text-sm font-medium text-gray-700 cursor-pointer">
-                                    我了解本次【職場急診室】採限額制；是否錄取，將於 3/19 統一通知前 10 名，錄取者請於通知後 24 小時內完成繳費，逾時未完成繳費者，將視同放棄並取消名額；未錄取者不需繳費。
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div class="pt-4">
-                            <button type="submit" class="w-full bg-british-green text-antique-gold font-serif-tc font-bold text-xl py-4 rounded hover:bg-opacity-90 transition duration-300 shadow-lg flex justify-center items-center gap-2">
-                                <span>提交掛號單</span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                            <p class="text-center text-xs text-gray-400 mt-3">
-                                <i class="fa-solid fa-lock"></i> 您的資料將嚴格保密，僅供諮詢使用。
-                            </p>
-                        </div>
-                    </form>
+                    <div class="w-16 h-1 bg-gray-300 mx-auto mb-8"></div>
                     
-                    <!-- Success Message (Hidden by default) -->
-                    <div id="successMessage" class="hidden text-center py-10 fade-in-up">
-                        <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fa-solid fa-check text-4xl"></i>
-                        </div>
-                        
-                        <h3 class="text-2xl md:text-3xl font-serif-tc font-bold text-british-green mb-6">掛號單已送出！</h3>
-                        
-                        <div class="text-gray-700 space-y-4 leading-relaxed text-sm md:text-base max-w-lg mx-auto">
-                            <p>已收到你的掛號單，謝謝你的信任 🩺</p>
-                            
-                            <p class="font-bold text-british-green">
-                                【Eva 老師｜職場急診室】<br>
-                                將於 3/19 統一通知前 10 名錄取者。
-                            </p>
-                            
-                            <div class="w-16 h-px bg-gray-300 mx-auto my-4"></div>
+                    <p class="text-gray-600 text-base md:text-lg leading-relaxed font-sans mb-8">
+                        感謝大家對【Eva｜職場急診室】的熱烈響應！<br>
+                        目前限額問診名額已全數額滿，掛號系統已暫時關閉。<br><br>
+                        如果您這次未能報名成功，也歡迎持續關注「律色思維」，<br>
+                        未來有活動都會第一時間公告！
+                    </p>
 
-                            <p>
-                                若你有錄取，將會收到繳費通知，<br>
-                                並請於 24 小時內完成繳費，以保留問診名額。
-                            </p>
-                            
-                            <p class="font-bold text-british-green">
-                                請留意您的 Instagram 訊息，以免錯過通知。
-                            </p>
-
-                            <p class="text-xs text-gray-500 mt-6 pt-4 border-t border-gray-100">
-                                若你不確定是否填寫正確的 IG 帳號，<br>
-                                請於表單送出後主動私訊小編告知，謝謝 😊
-                            </p>
-                        </div>
-
-                        <button onclick="location.reload()" class="mt-8 px-6 py-2 border border-british-green text-british-green rounded hover:bg-british-green hover:text-white transition duration-300 text-sm font-bold">
-                            返回首頁
-                        </button>
-                    </div>
+                    <a href="https://www.instagram.com/legal._.thinking/reels/" target="_blank" class="inline-block bg-british-green text-white font-bold py-3 px-8 rounded shadow hover:bg-opacity-90 transition w-full md:w-auto">
+                        <i class="fa-brands fa-instagram mr-2"></i> 追蹤 IG 掌握最新消息
+                    </a>
                 </div>
             </section>
 
-            <!-- Footer -->
+            <!-- 6. Footer -->
             <footer class="bg-british-green text-gray-400 py-8 text-center text-sm border-t border-antique-gold relative z-10">
                 <p class="mb-2 font-serif-tc text-lg text-antique-gold tracking-widest">Eva｜職場急診室</p>
                 <p>&copy; 2026 Eva Workplace Clinic. All Rights Reserved.</p>
@@ -650,23 +429,6 @@
     </div>
 
     <script>
-        // ==========================================
-        //  Google Form 設定區域
-        //  請填入您在 Google 表單原始碼中找到的 "entry.xxxxxx" ID
-        // ==========================================
-        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScsMhLUFXcUfhTFqDLYstPxBIqEIX20J9-E-VnATUQ-Ep5vCw/formResponse";
-        
-        const FIELD_MAPPING = {
-            name: "entry.1468484193",      // 姓名
-            instagram: "entry.274981656",  // Instagram
-            phone: "entry.612246579",      // 聯絡電話
-            email: "entry.366117670", // ⚠️ 請替換：電子信箱的 entry ID (需先在 Google 表單新增題目)
-            role: "entry.469425128",       // 角色
-            symptoms: "entry.825998086",    // 症狀
-            confirmations: "entry.154126521" // 確認選項 (Checkbox)
-        };
-
-
         function toggleMenu() {
             const menu = document.getElementById('menuOverlay');
             const icon = document.getElementById('menuIcon');
@@ -685,99 +447,6 @@
                 icon.classList.add('fa-bars');
                 // Restore body scroll
                 document.body.style.overflow = '';
-            }
-        }
-
-        // Logic for Dropdown and "Other" Input Visibility
-        document.getElementById('role').addEventListener('change', function() {
-            const otherContainer = document.getElementById('role_other_container');
-            const otherInput = document.getElementById('role_other');
-            
-            // If "Other" option is selected
-            if (this.value === '自由接案／其他（請簡述）') {
-                otherContainer.classList.remove('hidden');
-                otherInput.setAttribute('required', 'required');
-            } else {
-                otherContainer.classList.add('hidden');
-                otherInput.removeAttribute('required');
-            }
-        });
-
-        // Form Handling Logic with Direct Google Form Submission
-        async function handleFormSubmit(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const originalContent = btn.innerHTML;
-            
-            // 1. UI Loading State
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 處理中...';
-            btn.classList.add('opacity-50', 'cursor-not-allowed');
-            btn.disabled = true;
-
-            try {
-                // 2. Collect Data
-                const name = document.getElementById('name').value;
-                const instagram = document.getElementById('instagram').value;
-                const phone = document.getElementById('phone').value;
-                const email = document.getElementById('email').value; // Get Email
-                let symptoms = document.getElementById('symptoms').value;
-                
-                // 3. Handle Role and Other Text
-                let roleToSend = document.getElementById('role').value;
-                
-                let otherRoleText = "";
-                if (roleToSend === '自由接案／其他（請簡述）') {
-                    otherRoleText = document.getElementById('role_other').value;
-                }
-
-                // Merge "Other" text into symptoms to satisfy Google Form's strict validation
-                if (otherRoleText) {
-                    symptoms = `【角色備註】：${otherRoleText}\n\n${symptoms}`;
-                }
-
-                // 4. Construct Google Form Data
-                const formData = new URLSearchParams();
-                formData.append(FIELD_MAPPING.name, name);
-                formData.append(FIELD_MAPPING.instagram, instagram);
-                formData.append(FIELD_MAPPING.phone, phone);
-                formData.append(FIELD_MAPPING.email, email); // Add Email to form data
-                formData.append(FIELD_MAPPING.role, roleToSend);
-                formData.append(FIELD_MAPPING.symptoms, symptoms);
-
-                // 5. Handle Checkbox Confirmations
-                // Important: Google Form expects exact text match for checkboxes
-                if (document.getElementById('confirm1').checked) {
-                    const text1 = "我了解本活動為【文字形式】之職場個人諮詢，非即時聊天服務，但於問診期間內，每一則訊息皆會回覆。";
-                    formData.append(FIELD_MAPPING.confirmations, text1);
-                }
-                if (document.getElementById('confirm2').checked) {
-                    const text2 = "我了解本次【職場急診室】採限額制；是否錄取，將於 3/19 統一通知前 10 名，錄取者請於通知後 24 小時內完成繳費，逾時未完成繳費者，將視同放棄並取消名額；未錄取者不需繳費。";
-                    formData.append(FIELD_MAPPING.confirmations, text2);
-                }
-
-                // 6. Send Data using no-cors mode
-                await fetch(GOOGLE_FORM_URL, {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'no-cors'
-                });
-
-                // 7. Success UI (Modified to show Alert First)
-                // 加入瀏覽器原生的 Alert 跳出視窗
-                alert("掛號單已送出！即將由專人進行審核。");
-
-                document.getElementById('consultationForm').classList.add('hidden');
-                document.getElementById('formIntro').classList.add('hidden');
-                document.getElementById('successMessage').classList.remove('hidden');
-                document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-
-            } catch (error) {
-                console.error("Error submitting form:", error);
-                alert("送出失敗，請檢查網路連線或稍後再試。");
-                
-                btn.innerHTML = originalContent;
-                btn.classList.remove('opacity-50', 'cursor-not-allowed');
-                btn.disabled = false;
             }
         }
 
